@@ -1,0 +1,15 @@
+_parent_: options/bases/base_density_poses.yaml
+
+group: indoor1
+name: density_p
+
+render:
+  depth: 10
+
+data:
+  scene: indoor1
+
+train:
+  range: 20
+  distance: 0.7
+

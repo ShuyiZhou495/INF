@@ -1,0 +1,14 @@
+_parent_: options/bases/base_density_poses.yaml
+
+group: outdoor
+name: density_p
+
+render:
+  depth: 30
+
+data:
+  scene: outdoor
+
+train:
+  range: 60
+  distance: 2

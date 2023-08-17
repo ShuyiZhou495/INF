@@ -1,0 +1,38 @@
+# train color field while optimizing extrinsic
+_parent_: options/bases/base.yaml   
+
+group:                                                      # name of experiment group
+name:                                                       # name of experiment run                      
+density_name:                                               # name of output folder when training density field
+
+data:                                                       # data options
+    scene:                                                  # data scene
+    sensor: insta                                           # sensor to use (insta or ouster)
+    image_size: [3040, 6080]                                # will resize input image sizes to this [height,width]
+
+freq:                                                       # periodic actions during training
+    scalar: 1000                                            # log losses and scalar states (every N iterations)
+    val:  10000                                             # validate on val set (every N epochs)
+    ckpt:  10000                                            # save checkpoint (every N epochs)
+
+
+train:                                                      # training options
+    multi_scale: [[0, 8],[5000, 4],[10000, 2],[50000, 1]]   # multi-scaling options, [[iteration, scale]]
+    iteration: 
+    rand_rays: 2048
+
+render:
+    image_size: [512, 1024]
+
+camera: panorama                                            # camera_type
+
+extrinsic: [0,0,0,0,0,0]                                    # initial values for extrinsic parameters
+
+arch:                                                       # architecture
+    layers_feat: [null,256,256,256,256,256,256,3]           # hidden layers for feature/density MLP
+    skip: [4]                                               # skip connections
+    posenc:                                                 # positional encoding
+        L_3D: 8                                             # number of bases (3D point)
+
+lr:
+    pose: 0.01                                             # learning rate for extrinsic parameters

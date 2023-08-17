@@ -1,0 +1,36 @@
+# train density field with known lidar poses
+_parent_: options/bases/base.yaml  
+
+group:                                                      # name of experiment group
+name:                                                       # name of experiment run
+                 
+render:                                                     # render options
+    depth:                                                  # max depth value in the scene when rendering
+
+data:                                                       # data options
+    scene:                                                  # data scene
+    sensor: ouster                                          # sensor to use (insta or ouster)
+    near_far: [0.5, 30]                                     # near and far range of ray
+
+freq:                                                       # periodic actions during training
+    scalar: 500                                             # log losses and scalar states (every N iterations)
+    val:  20000                                             # validate on val set (every N epochs)
+    ckpt:  5000                                             # save checkpoint (every N epochs)
+
+arch:                                                       # achitecture of the MLP
+    layers_feat: [null,256,256,256,256,256,256]             # hidden layers for feature/density MLP
+    skip: [4]                                               # skip connections
+    posenc:                                                 # positional encoding
+        L_3D: 8                                             # number of bases (3D point)
+
+train:                                                      # training options
+    poses: false                                            # do not train lidar poses
+    range: 60                                               # a rough range of the scene, to normalize the points
+    iteration:
+        all: 40000                                          # iterations to use
+    use_weight:  True                                       # use edge weighting or not                             
+
+    loss_weight:                                            # weight of weights
+        depth: 1
+        opacity: 0.01
+        empty: 1

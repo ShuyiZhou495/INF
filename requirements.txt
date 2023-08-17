@@ -1,0 +1,10 @@
+torchvision==0.15.1
+Pillow==9.5.0
+tqdm==4.65.0
+imageio==2.21.1
+easydict==1.9
+open3d==0.17.0
+termcolor==1.1.0
+matplotlib==3.5.3
+PyYAML==6.0
+tensorboard==2.14.0

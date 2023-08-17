@@ -1,0 +1,40 @@
+group:                                                      # name of experiment group
+name:                                                       # name of experiment run
+model:                                                      # density or color (must be specified from command line)
+yaml:                                                       # config file (must be specified from command line)
+
+seed: 0                                                     # seed number (for both numpy and pytorch)
+gpu: 0                                                      # GPU index number
+
+render:                                                     # render options
+    depth:                                                  # max depth value in the scene when rendering
+    image_size:  [320, 640]                                 # render image size
+
+data:                                                       # data options
+    scene:                                                  # data scene
+    num_workers: 8                                          # number of parallel workers for data loading
+    sensor:                                                 # sensor to use (insta or ouster)
+    near_far: [0.5, 30]                                     # near and far range of ray
+    length: 30                                              # total number of frames to use
+
+tb:                                                         # TensorBoard options
+    num_images: [4,8]                                       # number of (tiled) images to visualize in TensorBoard
+
+freq:                                                       # periodic actions during training
+    scalar: 500                                             # log losses and scalar states (every N iterations)
+    val:  20000                                             # validate on val set (every N epochs)
+    ckpt:  5000                                             # save checkpoint (every N epochs)
+
+train:                                                      # training options
+    rand_rays: 1024                                         # numbers of rays to use in every iteration
+    range: 60                                               # a rough range of the scene, to normalize the points
+    sample_intvs: 128                                       # number of points to sampled on a ray
+
+arch:                                                       # achitecture of the MLP
+    layers_feat: [null,256,256,256,256,256,256]             # hidden layers for feature/density MLP
+    skip: [4]                                               # skip connections
+    posenc:                                                 # positional encoding
+        L_3D: 8                                             # number of bases (3D point)
+
+lr:
+    field: 0.0005                                           # learning rate for color/dnesity field

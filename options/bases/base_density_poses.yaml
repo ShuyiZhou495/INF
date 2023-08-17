@@ -1,0 +1,26 @@
+# train density field while estimating lidar poses
+_parent_: options/bases/base_density.yaml                
+
+group:                                                      # name of experiment group
+name:                                                       # name of experiment run
+
+render:                                                     # render options
+    depth:                                                  # max depth value in the scene when rendering
+
+data:                                                       # data options
+    scene:                                                  # data scene
+    sensor: ouster                                          # near and far range of ray
+
+train:                                                      # training options
+    poses: true                                             # train lidar poses
+    range: 60                                               # a rough range of the scene, to normalize the points
+    distance: 0.7                                           # the threshold distance to decide keyframe
+    use_weight:  True                                       # use edge weighting or not            
+    iteration:                                              # iterations for every process
+        all: 40000
+        base: 20000
+        pose: 5000
+        together: 15000
+
+lr:
+    pose: 0.0005                                            # learning rate of lidar poses

@@ -1,0 +1,13 @@
+_parent_: options/bases/base_density.yaml
+
+group: indoor2
+name: density
+
+render:
+  depth: 12
+
+data:
+  scene: indoor2
+
+train:
+  range: 20
